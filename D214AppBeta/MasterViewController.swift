@@ -13,18 +13,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @IBOutlet weak var SectionControl: UISegmentedControl!
     
+    @IBOutlet weak var segmentedController: UISegmentedControl!
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
     var currentData: [SuString] = [SuString]()
     var sectionidentifier: String?
+    var resourcesToggle: Bool = false
     
     //var savedSplitWebView: UIWebView? = UIWebView()
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //TableList = getFile(sectionidentifier!)
         
         //self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -69,6 +72,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         switch(SectionControl.selectedSegmentIndex){
         case 0:
             currentData = getFile("databaselist")
+            resourcesToggle = !resourcesToggle
             tableView.reloadData()
         case 1:
             currentData = getFile("resoucres")
@@ -239,8 +243,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         cell.textLabel!.text = object.valueForKey("timeStamp")!.description
     }
 
-    
-    
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if segmentedController.selectedSegmentIndex == 0 && resourcesToggle
+        {
+            
+            currentData = getFile(currentData[indexPath.row].getName())
+            tableView.reloadData()
+            resourcesToggle = !resourcesToggle
+            segmentedController.selectedSegmentIndex = -1
+        }
+    }
     
     /*
      // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.

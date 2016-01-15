@@ -43,7 +43,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         }
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-        self.splitViewController?.preferredDisplayMode = .PrimaryHidden
+        //self.splitViewController?.preferredDisplayMode = .PrimaryHidden
     }
 
     override func didReceiveMemoryWarning() {

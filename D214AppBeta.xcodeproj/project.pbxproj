@@ -14,9 +14,6 @@
 		47056E881C46D42C00CD1969 /* databaselist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47056E821C46D42C00CD1969 /* databaselist.txt */; };
 		47056E891C46D42C00CD1969 /* resoucres.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47056E831C46D42C00CD1969 /* resoucres.txt */; };
 		47056E8A1C46D42C00CD1969 /* writing.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47056E841C46D42C00CD1969 /* writing.txt */; };
-		47056E8C1C46D44000CD1969 /* SingleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47056E8B1C46D44000CD1969 /* SingleWebView.swift */; };
-		47056E8E1C46D44B00CD1969 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47056E8D1C46D44B00CD1969 /* MainTableViewController.swift */; };
-		47056E901C46D45400CD1969 /* LoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47056E8F1C46D45400CD1969 /* LoginWebViewController.swift */; };
 		47FF5D7A1C46CED20078280B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FF5D791C46CED20078280B /* AppDelegate.swift */; };
 		47FF5D7D1C46CED20078280B /* D214AppBeta.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47FF5D7B1C46CED20078280B /* D214AppBeta.xcdatamodeld */; };
 		47FF5D7F1C46CED20078280B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FF5D7E1C46CED20078280B /* MasterViewController.swift */; };
@@ -53,9 +50,6 @@
 		47056E821C46D42C00CD1969 /* databaselist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = databaselist.txt; sourceTree = "<group>"; };
 		47056E831C46D42C00CD1969 /* resoucres.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resoucres.txt; sourceTree = "<group>"; };
 		47056E841C46D42C00CD1969 /* writing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = writing.txt; sourceTree = "<group>"; };
-		47056E8B1C46D44000CD1969 /* SingleWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleWebView.swift; sourceTree = "<group>"; };
-		47056E8D1C46D44B00CD1969 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
-		47056E8F1C46D45400CD1969 /* LoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWebViewController.swift; sourceTree = "<group>"; };
 		47FF5D761C46CED20078280B /* D214AppBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = D214AppBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47FF5D791C46CED20078280B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47FF5D7C1C46CED20078280B /* D214AppBeta.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = D214AppBeta.xcdatamodel; sourceTree = "<group>"; };
@@ -111,30 +105,6 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		47056E791C46D02000CD1969 /* Webview */ = {
-			isa = PBXGroup;
-			children = (
-				47056E8B1C46D44000CD1969 /* SingleWebView.swift */,
-			);
-			name = Webview;
-			sourceTree = "<group>";
-		};
-		47056E7A1C46D02A00CD1969 /* TableView */ = {
-			isa = PBXGroup;
-			children = (
-				47056E8D1C46D44B00CD1969 /* MainTableViewController.swift */,
-			);
-			name = TableView;
-			sourceTree = "<group>";
-		};
-		47056E7B1C46D03500CD1969 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				47056E8F1C46D45400CD1969 /* LoginWebViewController.swift */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
 		47056E7C1C46D03F00CD1969 /* SplitViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				47056E781C46D01500CD1969 /* Data */,
-				47056E7B1C46D03500CD1969 /* Login */,
-				47056E7A1C46D02A00CD1969 /* TableView */,
-				47056E791C46D02000CD1969 /* Webview */,
 				47056E7C1C46D03F00CD1969 /* SplitViewController */,
 				47FF5D791C46CED20078280B /* AppDelegate.swift */,
 				47056E7D1C46D06300CD1969 /* SuString.swift */,
@@ -339,13 +306,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				47FF5D7D1C46CED20078280B /* D214AppBeta.xcdatamodeld in Sources */,
-				47056E8C1C46D44000CD1969 /* SingleWebView.swift in Sources */,
 				47056E7E1C46D06300CD1969 /* SuString.swift in Sources */,
 				47FF5D7A1C46CED20078280B /* AppDelegate.swift in Sources */,
 				47FF5D7F1C46CED20078280B /* MasterViewController.swift in Sources */,
-				47056E901C46D45400CD1969 /* LoginWebViewController.swift in Sources */,
 				47FF5D811C46CED20078280B /* DetailViewController.swift in Sources */,
-				47056E8E1C46D44B00CD1969 /* MainTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
