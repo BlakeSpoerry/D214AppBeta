@@ -42,7 +42,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: "http://ezproxy.d214.org:2048/login")!))
         }
         // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
+        //self.configureView()
         //self.splitViewController?.preferredDisplayMode = .PrimaryHidden
     }
 

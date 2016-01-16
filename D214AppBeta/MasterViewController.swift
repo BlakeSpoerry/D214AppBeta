@@ -57,9 +57,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+            //let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                //controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 controller.loadThisSite = currentData[indexPath.row]
@@ -94,8 +94,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let data = try? String(contentsOfFile:path, encoding: NSUTF8StringEncoding)
             if let content = (data){
                 let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-                for i in 0...myStrings.count-1{
-                    let section = myStrings[i].componentsSeparatedByString(",")
+                for item in myStrings{
+                    let section = item.componentsSeparatedByString(",")
                     list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
                 }
             }
@@ -108,6 +108,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
    
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return currentData.count
     }
 
@@ -217,26 +218,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return self.fetchedResultsController.sections?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return false
-    }
-
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
-                
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //print("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
-        }
-    }
+    
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
@@ -245,9 +227,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       
         if segmentedController.selectedSegmentIndex == 0 && resourcesToggle
         {
-            
             currentData = getFile(currentData[indexPath.row].getName())
             tableView.reloadData()
             resourcesToggle = !resourcesToggle
