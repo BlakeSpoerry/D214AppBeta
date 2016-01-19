@@ -1,1 +1,1 @@
-MLA,http://www.d214.org/academics/district-library-citations-mla/,MLA
+MLA|http://www.d214.org/academics/district-library-citations-mla/|MLA

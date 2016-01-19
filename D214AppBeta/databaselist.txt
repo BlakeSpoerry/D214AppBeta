@@ -1,3 +1,6 @@
-Auto,,
-Biography,,
-College and Career,,
+Auto||
+Biography||
+College and Career||
+Literature||
+Encyclopedias||
+Database Magazines||

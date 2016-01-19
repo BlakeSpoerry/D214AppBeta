@@ -95,7 +95,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let content = (data){
                 let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                 for item in myStrings{
-                    let section = item.componentsSeparatedByString(",")
+                    let section = item.componentsSeparatedByString("|")
                     list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
                 }
             }

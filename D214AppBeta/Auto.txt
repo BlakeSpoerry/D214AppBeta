@@ -1,1 +1,1 @@
-All Data Pro,http://ezproxy.d214.org:2048/login?url=http://library.alldatapro.com,
+All Data Pro|http://ezproxy.d214.org:2048/login?url=http://library.alldatapro.com|All Data Pro is a resource for automotive diagnostic and repair information.
