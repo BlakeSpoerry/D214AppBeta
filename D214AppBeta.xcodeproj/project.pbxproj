@@ -10,6 +10,9 @@
 		4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */; };
 		4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */; };
 		4095ABE91C4EEDBA001AFE83 /* Literature.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE61C4EEDBA001AFE83 /* Literature.txt */; };
+		40E043EB1C603624006BF150 /* D214Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E043EA1C603624006BF150 /* D214Cell.swift */; };
+		40E043ED1C63DC86006BF150 /* media.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40E043EC1C63DC86006BF150 /* media.txt */; };
+		40E499741C5F8C6400768FF0 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E499731C5F8C6400768FF0 /* PopoverViewController.swift */; };
 		47056E7E1C46D06300CD1969 /* SuString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47056E7D1C46D06300CD1969 /* SuString.swift */; };
 		47056E851C46D42C00CD1969 /* Auto.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47056E7F1C46D42C00CD1969 /* Auto.txt */; };
 		47056E861C46D42C00CD1969 /* Biography.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47056E801C46D42C00CD1969 /* Biography.txt */; };
@@ -49,6 +52,9 @@
 		4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Magazines.txt"; sourceTree = "<group>"; };
 		4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Encyclopedias.txt; sourceTree = "<group>"; };
 		4095ABE61C4EEDBA001AFE83 /* Literature.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Literature.txt; sourceTree = "<group>"; };
+		40E043EA1C603624006BF150 /* D214Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = D214Cell.swift; sourceTree = "<group>"; };
+		40E043EC1C63DC86006BF150 /* media.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.txt; sourceTree = "<group>"; };
+		40E499731C5F8C6400768FF0 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		47056E7D1C46D06300CD1969 /* SuString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuString.swift; sourceTree = "<group>"; };
 		47056E7F1C46D42C00CD1969 /* Auto.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Auto.txt; sourceTree = "<group>"; };
 		47056E801C46D42C00CD1969 /* Biography.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Biography.txt; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 		47056E781C46D01500CD1969 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				40E043EC1C63DC86006BF150 /* media.txt */,
 				4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */,
 				4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */,
 				4095ABE61C4EEDBA001AFE83 /* Literature.txt */,
@@ -118,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				47FF5D7E1C46CED20078280B /* MasterViewController.swift */,
+				40E499731C5F8C6400768FF0 /* PopoverViewController.swift */,
 				47FF5D801C46CED20078280B /* DetailViewController.swift */,
 			);
 			name = SplitViewController;
@@ -149,6 +157,7 @@
 				47056E781C46D01500CD1969 /* Data */,
 				47056E7C1C46D03F00CD1969 /* SplitViewController */,
 				47FF5D791C46CED20078280B /* AppDelegate.swift */,
+				40E043EA1C603624006BF150 /* D214Cell.swift */,
 				47056E7D1C46D06300CD1969 /* SuString.swift */,
 				47FF5D821C46CED20078280B /* Main.storyboard */,
 				47FF5D851C46CED20078280B /* Assets.xcassets */,
@@ -290,6 +299,7 @@
 				47056E881C46D42C00CD1969 /* databaselist.txt in Resources */,
 				47056E861C46D42C00CD1969 /* Biography.txt in Resources */,
 				4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */,
+				40E043ED1C63DC86006BF150 /* media.txt in Resources */,
 				47056E891C46D42C00CD1969 /* resoucres.txt in Resources */,
 				47056E8A1C46D42C00CD1969 /* writing.txt in Resources */,
 				47056E851C46D42C00CD1969 /* Auto.txt in Resources */,
@@ -318,9 +328,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				47FF5D7D1C46CED20078280B /* D214AppBeta.xcdatamodeld in Sources */,
+				40E043EB1C603624006BF150 /* D214Cell.swift in Sources */,
 				47056E7E1C46D06300CD1969 /* SuString.swift in Sources */,
 				47FF5D7A1C46CED20078280B /* AppDelegate.swift in Sources */,
 				47FF5D7F1C46CED20078280B /* MasterViewController.swift in Sources */,
+				40E499741C5F8C6400768FF0 /* PopoverViewController.swift in Sources */,
 				47FF5D811C46CED20078280B /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -451,7 +463,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

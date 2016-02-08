@@ -9,14 +9,15 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate  {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate  {
 
     @IBOutlet weak var SectionControl: UISegmentedControl!
     
-    @IBOutlet weak var segmentedController: UISegmentedControl!
+    
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
+    var school: String = "JHHS"
     var currentData: [SuString] = [SuString]()
     var sectionidentifier: String?
     var resourcesToggle: Bool = false
@@ -67,6 +68,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 
             }
         }
+        if segue.identifier == "showPopover" {
+           
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                var controller = (segue.destinationViewController as! UINavigationController).popoverPresentationController
+                
+            }
+           
+        }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(
+        controller: UIPresentationController!) -> UIModalPresentationStyle {
+            return .None
     }
     @IBAction func SectionControlChanged(sender: UISegmentedControl) {
         switch(SectionControl.selectedSegmentIndex){
@@ -79,6 +93,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             tableView.reloadData()
         case 2:
             currentData = getFile("writing")
+            tableView.reloadData()
+        case 3:
+            currentData = getFile("media")
             tableView.reloadData()
         default:
             break
@@ -113,11 +130,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WebsiteCell")!
+        let cell = tableView.dequeueReusableCellWithIdentifier("WebsiteCell")! as! D214Cell
+        //cell.textLabel?.text = currentData[indexPath.row].getName()
+        //cell.selectionStyle = UITableViewCellSelectionStyle.Blue
+        //cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+        //cell.detailTextLabel?.text = currentData[indexPath.row].getInfo()
+        
         cell.textLabel?.text = currentData[indexPath.row].getName()
+        //cell.cellInfo
         
         return cell
     }
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showPopover", sender: self)
+    }
+    
     
     // MARK: - Fetched results controller
     
@@ -228,12 +255,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
-        if segmentedController.selectedSegmentIndex == 0 && resourcesToggle
+        if SectionControl.selectedSegmentIndex == 0 && resourcesToggle
         {
             currentData = getFile(currentData[indexPath.row].getName())
             tableView.reloadData()
             resourcesToggle = !resourcesToggle
-            segmentedController.selectedSegmentIndex = -1
+            SectionControl.selectedSegmentIndex = -1
         }
     }
     
