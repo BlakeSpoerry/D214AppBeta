@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate  {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate  {
 
     @IBOutlet weak var SectionControl: UISegmentedControl!
     
@@ -68,20 +68,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 
             }
         }
-        if segue.identifier == "showPopover" {
-           
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                var controller = (segue.destinationViewController as! UINavigationController).popoverPresentationController
-                
-            }
-           
-        }
+    
     }
     
-    func adaptivePresentationStyleForPresentationController(
-        controller: UIPresentationController!) -> UIModalPresentationStyle {
-            return .None
-    }
+
     @IBAction func SectionControlChanged(sender: UISegmentedControl) {
         switch(SectionControl.selectedSegmentIndex){
         case 0:
@@ -130,11 +120,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WebsiteCell")! as! D214Cell
-        //cell.textLabel?.text = currentData[indexPath.row].getName()
-        //cell.selectionStyle = UITableViewCellSelectionStyle.Blue
-        //cell.accessoryType = UITableViewCellAccessoryType.DetailButton
-        //cell.detailTextLabel?.text = currentData[indexPath.row].getInfo()
+        let cell = tableView.dequeueReusableCellWithIdentifier("WebsiteCell")!
+
         
         cell.textLabel?.text = currentData[indexPath.row].getName()
         //cell.cellInfo
@@ -142,9 +129,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return cell
     }
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showPopover", sender: self)
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("infoView"))! as UIViewController
+        let nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        let popover = nav.popoverPresentationController
+        self.presentViewController(nav, animated: true, completion: { _ in })
+        popover!.permittedArrowDirections = .Up
+        popoverContent.preferredContentSize = CGSizeMake(500, 600)
+        popover!.delegate = self
+        popover!.sourceView = self.view
+        popover!.sourceRect = CGRectMake(100, 100, 0 , 0)
     }
-    
     
     // MARK: - Fetched results controller
     
