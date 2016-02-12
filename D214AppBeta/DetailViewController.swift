@@ -41,6 +41,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         {
             WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: "http://ezproxy.d214.org:2048/login")!))
         }
+        self.navigationController?.navigationBar.tintColor =  UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
         // Do any additional setup after loading the view, typically from a nib.
         //self.configureView()
         //self.splitViewController?.preferredDisplayMode = .PrimaryHidden
