@@ -121,10 +121,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WebsiteCell")!
-
+        
+        let image: UIImage = UIImage(named: school+"-Info")!
+        
+        let button: UIButton = UIButton(type: .Custom)
+        let frame: CGRect = CGRectMake(44.0, 44.0, 25, 25)
+        button.frame = frame
+        button.setBackgroundImage(image, forState: .Normal)
+        
+        button.addTarget(self, action: "accessoryButtonTapped:event:", forControlEvents: .TouchUpInside)
+        button.backgroundColor = UIColor.clearColor()
+        cell.accessoryView = button
+        
+        
         
         cell.textLabel?.text = currentData[indexPath.row].getName()
-        //cell.cellInfo
         
         return cell
     }
@@ -135,10 +146,28 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let popover = nav.popoverPresentationController
         self.presentViewController(nav, animated: true, completion: { _ in })
         popover!.permittedArrowDirections = .Up
-        popoverContent.preferredContentSize = CGSizeMake(500, 600)
+        
+        popoverContent.preferredContentSize = CGSizeMake(250, 250)
+        //UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 300, height: 300), textContainer: NSTextContainer())
+        let textField: UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        textField.text = currentData[indexPath.row].getInfo()
+        textField.font = UIFont(name: "Helvetica", size: 18)
+        textField.editable = false
+        popoverContent.view.addSubview(textField)
         popover!.delegate = self
         popover!.sourceView = self.view
-        popover!.sourceRect = CGRectMake(100, 100, 0 , 0)
+        popover!.sourceRect = tableView.rectForRowAtIndexPath(indexPath)
+        
+        //popover!.sourceRect = CGRectMake(100, 100, 0 , 0)
+       // tableView.cellForRowAtIndexPath(indexPath).
+    }
+   func accessoryButtonTapped(sender: AnyObject, event: AnyObject) {
+        
+        var touches: Set<UITouch> = event.allTouches()!
+        var touch: UITouch = touches.first!
+        var currentTouchPosition: CGPoint = touch.locationInView(self.tableView)
+        var indexPath: NSIndexPath = self.tableView.indexPathForRowAtPoint(currentTouchPosition)!
+        tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
     }
     
     // MARK: - Fetched results controller

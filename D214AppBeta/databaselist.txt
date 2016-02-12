@@ -4,3 +4,5 @@ College and Career||
 Literature||
 Encyclopedias||
 Database Magazines||
+Database Newspapers||
+Science||
