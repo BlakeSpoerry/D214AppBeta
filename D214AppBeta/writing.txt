@@ -1,1 +1,5 @@
 MLA|http://www.d214.org/academics/district-library-citations-mla/|MLA
+MEL-Con Writing|http://www.d214.org/academics/district-library-mel-con-writing/|MEL-Con
+Thesis Statements|http://www.d214.org/academics/district-library-create-thesis/|Need help writing a thesis statement? Click Here!
+Writing a Works Cited Page|http://www.d214.org/academics/district-library-citations-mla/|
+EasyBib|http://www.easybib.com/|Generate citations in MLA, APA & Chicago formats for your bibliography
