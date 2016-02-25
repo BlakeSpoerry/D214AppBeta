@@ -1,1 +1,1 @@
-World Book Encyclopedia|http://ezproxy.d214.org:2048/login?url=http://www.worldbookonline.com/?subacct=N2771|World Book Encyclopedia includes three encyclopedias:  World Book Kids, World Book Student and World Book Advanced.  
+World Book Encyclopedia||http://ezproxy.d214.org:2048/login?url=http://www.worldbookonline.com/?subacct=N2771||World Book Encyclopedia includes three encyclopedias:  World Book Kids, World Book Student and World Book Advanced.  

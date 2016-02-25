@@ -45,6 +45,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,7 +104,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let content = (data){
                 let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                 for item in myStrings{
-                    let section = item.componentsSeparatedByString("|")
+                    let section = item.componentsSeparatedByString("||")
                     list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
                 }
             }
@@ -158,6 +159,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         popover!.delegate = self
         popover!.sourceView = self.view
         popover!.sourceRect = tableView.rectForRowAtIndexPath(indexPath)
+        popoverContent.navigationController?.setNavigationBarHidden(true, animated: true)
         
         //popover!.sourceRect = CGRectMake(100, 100, 0 , 0)
        // tableView.cellForRowAtIndexPath(indexPath).
