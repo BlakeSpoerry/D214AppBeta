@@ -41,6 +41,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         WebSiteView.delegate = self
         if loadThisSite != nil
         {
+            splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
             self.splitViewController?.presentsWithGesture = true
             LoginICON.title = "Logged In!"
             LoginICON.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
@@ -54,7 +55,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         else
         {
             if(isInitialWebView){
-
+                splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
                 //self.navigationItem.leftBarButtonItem?.enabled = false
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
                 splitViewController?.presentsWithGesture = false
@@ -129,6 +130,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             let bodyData = "user=\(savedUserName)&pass=\(savedPassword)"
             request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
             WebSiteView.loadRequest(request)
+            passwordTextField.resignFirstResponder()
+            usernameTextField.resignFirstResponder()
             
            
            

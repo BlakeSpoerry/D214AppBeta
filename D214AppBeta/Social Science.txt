@@ -8,5 +8,5 @@ Encyclopedia of World Cities||http://ezproxy.d214.org:2048/login?url=http://go.g
 Encyclopedia of Modern Middle East & North Africa||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780028659879&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
 Genocide and Crimes Against Humanity||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780028659923&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
 St. James Encyclopedia of Pop Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9781558625297&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-UXL American Decades||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693121&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-UXL Fashion, Costumes and Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693008&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
+American Decades||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693121&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
+Fashion, Costumes and Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693008&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
