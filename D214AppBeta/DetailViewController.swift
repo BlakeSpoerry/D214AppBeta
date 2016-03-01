@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 
+import SystemConfiguration
+
 class DetailViewController: UIViewController, UIWebViewDelegate {
     var isLoggedIn: Bool!
     @IBOutlet weak var LoginICON: UIBarButtonItem!
@@ -20,6 +22,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var WebSiteView: UIWebView!
     var isInitialWebView = true
     var loadThisSite: SuString!
+    var savedSplitButton: UIBarButtonItem!
     
     var detailItem: AnyObject? {
         didSet {
@@ -34,14 +37,18 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             
         }
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.secureTextEntry = true
         WebSiteView.delegate = self
+        
+        self.checkConnection()
         if loadThisSite != nil
         {
-            splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+            
+            self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
             LoginICON.title = "Logged In!"
             LoginICON.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
@@ -54,9 +61,12 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         }
         else
         {
+            
             if(isInitialWebView){
+                savedSplitButton = self.navigationItem.leftBarButtonItem
                 splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
-                //self.navigationItem.leftBarButtonItem?.enabled = false
+                self.navigationItem.leftBarButtonItem =  nil
+                self.navigationItem.leftBarButtonItem?.enabled = false
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
                 splitViewController?.presentsWithGesture = false
                 showLogin()
@@ -89,6 +99,9 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             let data = WebSiteView.stringByEvaluatingJavaScriptFromString("document.documentElement.outerHTML")
             
             let range = data?.rangeOfString("<title>Database Menu</title>")
+            
+            
+            
             if range != nil{
                 WebSiteView.alpha = 0.0
                 isLoggedIn = true
@@ -96,6 +109,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 LoginICON.title = "Logged In!"
                 LoginICON.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
                 self.splitViewController?.presentsWithGesture = true
+                self.navigationItem.leftBarButtonItem = savedSplitButton
                 
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
 
@@ -112,6 +126,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 alert.show()
             }
             
+            
 
         }
         isInitialWebView = false
@@ -122,6 +137,9 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         let savedUserName = usernameTextField.text!
         let savedPassword = passwordTextField.text!
         isLoggedIn = false
+        
+        self.checkConnection()
+
         if(!isLoggedIn){
             let URL: NSURL = NSURL(string: "http://ezproxy.d214.org:2048/login")!
             let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
@@ -150,5 +168,34 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         ImageOverlay.image = UIImage(named: "RedLogin")
     }
 
+    class func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
+    }
+    
+    func checkConnection(){
+        if(DetailViewController.isConnectedToNetwork() == false){
+            var alert = UIAlertView()
+            alert.title = "Network Error"
+            alert.message = "Not Connected To Wifi Or has been Disconnected"
+            alert.addButtonWithTitle("Please Recconnect and Retry")
+            alert.show()
+            
+        }
+
+    }
+    
+    
 }
 
