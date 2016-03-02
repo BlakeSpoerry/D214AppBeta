@@ -92,12 +92,16 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mOI-FS-AaM">
-                        <barButtonItem key="rightBarButtonItem" id="xN5-Nx-Zyv"/>
+                        <barButtonItem key="rightBarButtonItem" id="xN5-Nx-Zyv" userLabel="LogoutButton">
+                            <connections>
+                                <action selector="LogoutPressed:" destination="JEX-9P-axG" id="mU0-s7-3So"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ImageOverlay" destination="gGi-5u-WHU" id="zCb-Yo-SZn"/>
                         <outlet property="LoginButton" destination="C5p-As-FAr" id="YF7-0c-LR9"/>
-                        <outlet property="LoginICON" destination="xN5-Nx-Zyv" id="6XK-oa-ShD"/>
+                        <outlet property="LogoutButton" destination="xN5-Nx-Zyv" id="gh0-8s-Ljl"/>
                         <outlet property="WebSiteView" destination="IER-16-SKw" id="2m4-3p-PUq"/>
                         <outlet property="passwordTextField" destination="KYp-7U-KZf" id="T0C-Cn-XPM"/>
                         <outlet property="usernameTextField" destination="h4I-QP-BF9" id="21A-OT-Vay"/>

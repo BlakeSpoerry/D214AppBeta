@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4011ECFA1C7F7CBF00151EF8 /* Social Science.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4011ECF91C7F7CBF00151EF8 /* Social Science.txt */; };
 		4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */; };
 		4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */; };
 		4095ABE91C4EEDBA001AFE83 /* Literature.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE61C4EEDBA001AFE83 /* Literature.txt */; };
 		40E043ED1C63DC86006BF150 /* media.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40E043EC1C63DC86006BF150 /* media.txt */; };
+		40EEAAD41C877DAC002A378E /* Social Science.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40EEAAD31C877DAC002A378E /* Social Science.txt */; };
 		40FF38D41C6D7D8E005A308F /* Database Newspapers.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */; };
 		40FF38D61C6D7D9C005A308F /* Science.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40FF38D51C6D7D9C005A308F /* Science.txt */; };
 		47056E7E1C46D06300CD1969 /* SuString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47056E7D1C46D06300CD1969 /* SuString.swift */; };
@@ -50,11 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4011ECF91C7F7CBF00151EF8 /* Social Science.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Social Science.txt"; sourceTree = "<group>"; };
 		4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Magazines.txt"; sourceTree = "<group>"; };
 		4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Encyclopedias.txt; sourceTree = "<group>"; };
 		4095ABE61C4EEDBA001AFE83 /* Literature.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Literature.txt; sourceTree = "<group>"; };
 		40E043EC1C63DC86006BF150 /* media.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.txt; sourceTree = "<group>"; };
+		40EEAAD31C877DAC002A378E /* Social Science.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Social Science.txt"; sourceTree = "<group>"; };
 		40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Newspapers.txt"; sourceTree = "<group>"; };
 		40FF38D51C6D7D9C005A308F /* Science.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Science.txt; sourceTree = "<group>"; };
 		47056E7D1C46D06300CD1969 /* SuString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuString.swift; sourceTree = "<group>"; };
@@ -112,8 +112,8 @@
 				40E043EC1C63DC86006BF150 /* media.txt */,
 				4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */,
 				4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */,
+				40EEAAD31C877DAC002A378E /* Social Science.txt */,
 				4095ABE61C4EEDBA001AFE83 /* Literature.txt */,
-				4011ECF91C7F7CBF00151EF8 /* Social Science.txt */,
 				47056E7F1C46D42C00CD1969 /* Auto.txt */,
 				47056E801C46D42C00CD1969 /* Biography.txt */,
 				47056E811C46D42C00CD1969 /* College and Career.txt */,
@@ -257,6 +257,7 @@
 				TargetAttributes = {
 					47FF5D751C46CED20078280B = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = C3EL86XFP8;
 					};
 					47FF5D8E1C46CED20078280B = {
 						CreatedOnToolsVersion = 7.2;
@@ -298,7 +299,7 @@
 				40FF38D41C6D7D8E005A308F /* Database Newspapers.txt in Resources */,
 				47FF5D861C46CED20078280B /* Assets.xcassets in Resources */,
 				47056E871C46D42C00CD1969 /* College and Career.txt in Resources */,
-				4011ECFA1C7F7CBF00151EF8 /* Social Science.txt in Resources */,
+				40EEAAD41C877DAC002A378E /* Social Science.txt in Resources */,
 				47FF5D841C46CED20078280B /* Main.storyboard in Resources */,
 				4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */,
 				47056E881C46D42C00CD1969 /* databaselist.txt in Resources */,
@@ -479,8 +480,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = D214AppBeta/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jhhs.D214AppBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -491,8 +493,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = D214AppBeta/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jhhs.D214AppBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";

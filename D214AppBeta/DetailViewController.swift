@@ -12,8 +12,8 @@ import WebKit
 import SystemConfiguration
 
 class DetailViewController: UIViewController, UIWebViewDelegate {
-    var isLoggedIn: Bool!
-    @IBOutlet weak var LoginICON: UIBarButtonItem!
+    var isLoggedIn =  false
+    @IBOutlet weak var LogoutButton: UIBarButtonItem!
     @IBOutlet weak var ImageOverlay: UIImageView!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -50,8 +50,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             
             self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
-            LoginICON.title = "Logged In!"
-            LoginICON.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
+            LogoutButton.title = "Logged In!"
+            LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
             isLoggedIn = true
             WebSiteView.loadRequest(NSURLRequest(URL: (loadThisSite.getURL())))
            
@@ -70,8 +70,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
                 splitViewController?.presentsWithGesture = false
                 showLogin()
-                LoginICON.title = "Not Logged In"
-                LoginICON.tintColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
+                
             }
             
             WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: "http://ezproxy.d214.org:2048/login")!))
@@ -106,13 +105,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 WebSiteView.alpha = 0.0
                 isLoggedIn = true
                 hideLogin()
-                LoginICON.title = "Logged In!"
-                LoginICON.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
+                LogoutButton.title = "Logged In!"
+                LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
                 self.splitViewController?.presentsWithGesture = true
                 self.navigationItem.leftBarButtonItem = savedSplitButton
                 
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
-
+                usernameTextField.text = ""
+                passwordTextField.text = ""
                 
                 
             }
@@ -151,6 +151,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             passwordTextField.resignFirstResponder()
             usernameTextField.resignFirstResponder()
             
+            
            
            
         }
@@ -160,12 +161,21 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         usernameTextField.alpha = 0.0
         passwordTextField.alpha = 0.0
         ImageOverlay.image = UIImage(named: "backgroundimage")
+        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
     }
     func showLogin(){
         usernameTextField.alpha = 1.0
         passwordTextField.alpha = 1.0
         LoginButton.alpha = 1.0
         ImageOverlay.image = UIImage(named: "RedLogin")
+        self.navigationItem.leftBarButtonItem =  nil
+        self.navigationItem.leftBarButtonItem?.enabled = false
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
+        splitViewController?.presentsWithGesture = false
+        LogoutButton.title = "Not Logged In"
+        LogoutButton.tintColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
+        splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
+
     }
 
     class func isConnectedToNetwork() -> Bool {
@@ -195,7 +205,34 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         }
 
     }
+    @IBAction func LogoutPressed(sender: AnyObject) {
+        if(isLoggedIn == true){
+        let alertController = UIAlertController(title: "Logout?", message: "Are you sure you want to logout?", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Yes", style: .Cancel) { (action) in
+            self.WebSiteView.loadRequest(NSURLRequest (URL: NSURL(string: "http://ezproxy.d214.org:2048/logout")!))
+            self.isInitialWebView = true
+            
+            self.showLogin()
+            
+            
+            
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "No", style: .Destructive) { (action) in
+            
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            
+        }
+        
+        }
+    }
     
-    
+
 }
 

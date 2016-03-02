@@ -1,9 +1,9 @@
-Auto|||| 
-Biography||||
-College and Career||||
-Literature||||
-Encyclopedias||||
-Database Magazines||||
-Database Newspapers||||
-Science||||
-Social Science||||
+Auto|| 
+Biography||
+College and Career||
+Literature||
+Encyclopedias||
+Database Magazines||
+Database Newspapers||
+Science||
+Social Science||

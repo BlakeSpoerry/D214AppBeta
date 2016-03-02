@@ -1,1 +1,1 @@
-Career Cruising||http://ezproxy.d214.org:2048/login?url=http://www.careercruising.com/home/GroupLogin.aspx||A career guidance and planning system.  It includes detailed occupation profiles.  Company:  Anaca Technologies Ltd.
+Career Cruising|http://ezproxy.d214.org:2048/login?url=http://www.careercruising.com/home/GroupLogin.aspx|A career guidance and planning system.  It includes detailed occupation profiles.  Company:  Anaca Technologies Ltd.

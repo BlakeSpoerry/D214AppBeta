@@ -1,12 +1,12 @@
-Americans at War||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780028659930&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Bowling, Beatnicks, ad Bell Bottoms||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787692902&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Cities of the World||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787691226&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Early Civilizations in the Americas||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693954&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Encyclopedia of Food and Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780684314167&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Encyclopedia of Modern Asia||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780684314198&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Encyclopedia of World Cities||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693060&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Encyclopedia of Modern Middle East & North Africa||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780028659879&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Genocide and Crimes Against Humanity||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780028659923&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-St. James Encyclopedia of Pop Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9781558625297&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-American Decades||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693121&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
-Fashion, Costumes and Culture||http://ezproxy.d214.org:2048/login?url=http://go.galegroup.com/ps/i.do?id=GALE|9780787693008&v=2.1&u=dist214&it=aboutBook&p=GVRL&sw=w||
+Americans at War||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780028659930||
+Bowling, Beatnicks, ad Bell Bottoms||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787692902||
+Cities of the World||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787691226||
+Early Civilizations in the Americas||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787693954||
+Encyclopedia of Food and Culture||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780684314167||
+Encyclopedia of Modern Asia||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780684314198||
+Encyclopedia of World Cities||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787693060||
+Encyclopedia of Modern Middle East & North Africa||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780028659879||
+Genocide and Crimes Against Humanity||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780028659923||
+St. James Encyclopedia of Pop Culture||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9781558625297||
+American Decades||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787693121||
+Fashion, Costumes and Culture||http://ezproxy.d214.org:2103/ps/eToc.do?userGroupName=dist214&docId=GALE%7C9780787693008||

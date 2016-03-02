@@ -1,1 +1,1 @@
-All Data Pro||http://ezproxy.d214.org:2096/||All Data Pro is a resource for automotive diagnostic and repair information.
+All Data Pro|http://ezproxy.d214.org:2096/|All Data Pro is a resource for automotive diagnostic and repair information.

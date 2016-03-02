@@ -104,7 +104,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let content = (data){
                 let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                 for item in myStrings{
-                    let section = item.componentsSeparatedByString("||")
+                    let section = item.componentsSeparatedByString("|")
                     list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
                 }
             }
@@ -133,6 +133,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         button.addTarget(self, action: "accessoryButtonTapped:event:", forControlEvents: .TouchUpInside)
         button.backgroundColor = UIColor.clearColor()
+        if(SectionControl.selectedSegmentIndex == 0){
+        button.enabled = false
+        button.frame = CGRectMake(0, 0, 0, 0)
+        }
         cell.accessoryView = button
         
         
