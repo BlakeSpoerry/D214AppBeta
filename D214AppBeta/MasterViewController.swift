@@ -133,15 +133,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         button.addTarget(self, action: "accessoryButtonTapped:event:", forControlEvents: .TouchUpInside)
         button.backgroundColor = UIColor.clearColor()
-        if(SectionControl.selectedSegmentIndex == 0){
+        if(currentData[indexPath.row].getInfo() == ""){
         button.enabled = false
         button.frame = CGRectMake(0, 0, 0, 0)
         }
         cell.accessoryView = button
         
         
-        
+        cell.textLabel?.textColor = UIColor.blackColor()
+
         cell.textLabel?.text = currentData[indexPath.row].getName()
+        if(!(SectionControl.selectedSegmentIndex == 0)){
+            cell.textLabel?.textColor = UIColor.blueColor()
+        }
         
         return cell
     }
@@ -151,7 +155,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         nav.modalPresentationStyle = UIModalPresentationStyle.Popover
         let popover = nav.popoverPresentationController
         self.presentViewController(nav, animated: true, completion: { _ in })
-        popover!.permittedArrowDirections = .Up
+       // popover!.permittedArrowDirections = .Up
         
         popoverContent.preferredContentSize = CGSizeMake(250, 250)
         //UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 300, height: 300), textContainer: NSTextContainer())
