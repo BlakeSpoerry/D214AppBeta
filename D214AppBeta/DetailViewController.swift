@@ -18,12 +18,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     
+    @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var WebSiteView: UIWebView!
     var isInitialWebView = true
     var loadThisSite: SuString!
     var savedSplitButton: UIBarButtonItem!
     var savedLoginInfo: [String]!
+    var AutoLogin = false
     
     var detailItem: AnyObject? {
         didSet {
@@ -48,11 +50,12 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         self.checkConnection()
         if loadThisSite != nil
         {
-            
             self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
             LogoutButton.title = "Logged In!"
             LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
+            ImageOverlay.alpha = 0.0
+        
             isLoggedIn = true
             WebSiteView.loadRequest(NSURLRequest(URL: (loadThisSite.getURL())))
            
@@ -89,6 +92,45 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func webViewDidStartLoad(webView: UIWebView) {
+        if(loadThisSite != nil){
+            
+            if(loadThisSite.getName() == "Chicago Tribune" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "http://nieonline.com/chicago/studentconnect.cfm")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                let bodyData = "teacherlastname=jhhsnewspaper@gmail.com&classpword=huskies"
+                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                AutoLogin = true
+                WebSiteView.loadRequest(request)
+                
+            }
+            if(loadThisSite.getName() == "Chicago Sun Times" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "http://chicagosuntimesnie.newspaperdirect.com/")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                let bodyData = "_ctl0:_ctl0:MainContentPlaceHolder:MainPanel:_ctl4:login:_ctl0:UserName=jhhsnewspaper@gmail.com&_ctl0:_ctl0:MainContentPlaceHolder:MainPanel:_ctl4:login:_ctl0:Password=huskies"
+                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                AutoLogin = true
+                WebSiteView.loadRequest(request)
+                
+            }
+            if(loadThisSite.getName() == "Flipster" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eon&custid=s9461855")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                let bodyData = "user=johnhersey&password=library"
+                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                AutoLogin = true
+                WebSiteView.loadRequest(request)
+            }
+            
+
+        }
+    }
 
     func webViewDidFinishLoad(webView: UIWebView) {
         if (!isInitialWebView){
@@ -119,15 +161,34 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             
             if(!isLoggedIn)
             {
-                var alert = UIAlertView()
-                alert.title = "Login Problem"
-                alert.message = "Wrong Username Or Password"
-                alert.addButtonWithTitle("Try Agian!")
-                alert.show()
+                let alert = UIAlertController(title: "Login Problem", message: "Wrong Username Or Password", preferredStyle: .Alert)
+                let button = UIAlertAction(title: "Try Agian!", style: .Default, handler: nil)
+                alert.addAction(button)
+                presentViewController(alert, animated: true, completion: nil)
             }
+            if(loadThisSite != nil){
+                if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
+                  
+                    let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getAttribute('description').innerhtml")
+                    let link2 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').hasAttribute('description')")
+                    let link3 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').metadata.description")
+                    print(link!)
+                    print(link2!)
+                    print(link3!)
+                    AutoLogin = true
+                    /*if let content = (link){
+                        let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+                        for item in myStrings{
+                            if(item.containsString("/thecorrespondent/")){
+                            print(item)
+                            }
+                    AutoLogin = true
+                }
+                }
+                }*/
             
-            
-
+                }
+            }
         }
         isInitialWebView = false
         
@@ -136,6 +197,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     @IBAction func LoginINPressed(sender: AnyObject) {
         let savedUserName = usernameTextField.text!
         let savedPassword = passwordTextField.text!
+        savedLoginInfo = [savedUserName,savedPassword]
         isLoggedIn = false
         
         self.checkConnection()
@@ -160,18 +222,23 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         LoginButton.alpha = 0.0
         usernameTextField.alpha = 0.0
         passwordTextField.alpha = 0.0
+        logoView.alpha = 0.0
         ImageOverlay.image = UIImage(named: "backgroundimage")
         self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
     }
     func showLogin(){
+        logoView.image = UIImage(named: "D214Logo")
         usernameTextField.alpha = 1.0
         passwordTextField.alpha = 1.0
         LoginButton.alpha = 1.0
         ImageOverlay.image = UIImage(named: "RedLogin")
+        ImageOverlay.alpha = 1.0
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.leftBarButtonItem?.enabled = false
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
         splitViewController?.presentsWithGesture = false
+        usernameTextField.placeholder = "Net ID"
+        passwordTextField.placeholder = "Password"
         LogoutButton.title = "Not Logged In"
         LogoutButton.enabled = false
         LogoutButton.tintColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
@@ -197,12 +264,19 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     
     func checkConnection(){
         if(DetailViewController.isConnectedToNetwork() == false){
-            var alert = UIAlertView()
-            alert.title = "Network Error"
-            alert.message = "Not Connected to Wifi or has been Disconnected"
-            alert.addButtonWithTitle("Please Recconnect and Retry")
-            alert.show()
             
+        let alertController = UIAlertController(title: "Network Error", message: "Not Connected to Wifi or has been Disconnected", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Please Recconnect and Retry", style: .Destructive) { (action) in
+            
+        }
+        alertController.addAction(cancelAction)
+        self.presentViewController(alertController, animated: true){
+                
+        }
+                
+            
+
         }
 
     }
@@ -233,7 +307,23 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         
         }
     }
-    
+    func getFile(filename: String) -> [SuString]{
+        var list = [SuString]()
+        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "txt"){
+            
+            let data = try? String(contentsOfFile:path, encoding: NSUTF8StringEncoding)
+            if let content = (data){
+                let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+                for item in myStrings{
+                    let section = item.componentsSeparatedByString("|")
+                    list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
+                }
+            }
+        }
+        return list
+    }
 
 }
+
+
 
