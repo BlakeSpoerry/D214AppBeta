@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 import SystemConfiguration
 
@@ -127,6 +128,31 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 AutoLogin = true
                 WebSiteView.loadRequest(request)
             }
+            if(loadThisSite.getName() == "Overdrive" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "https://twpdistrict214.libraryreserve.com/10/45/en/BANGAuthenticate.dll")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                request.addValue("SecureSession=97AA9D8F-2B77-4520-A09D-228B902A1BAE; SourceHost=d214.lib.overdrive.com; UIOptions=10|45|en; _ga=GA1.3.1656530739.1457975062; _dc_gtm_UA-34791607-6=1; _ga=GA1.2.1656530739.1457975062; _dc_gtm_UA-34791607-28=1", forHTTPHeaderField: "Cookie")
+                
+                var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                var context:NSManagedObjectContext = appDel.managedObjectContext
+                var rdata = NSFetchRequest(entityName: "User")
+                rdata.returnsObjectsAsFaults = false
+                var results:NSArray = try! context.executeFetchRequest(rdata)
+                
+                if(results.count > 0){
+                var res = results[0] as! NSManagedObject
+               // NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
+                
+                let bodyData = "LibraryCardILS=township214&lcn=\(res.valueForKey("username") as! String)&LibraryCardPIN=\(res.valueForKey("password") as! String)&URL=Default.htm"
+                
+                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                AutoLogin = true
+                WebSiteView.loadRequest(request)
+                    }
+
+            }
             
 
         }
@@ -149,9 +175,16 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
                 self.splitViewController?.presentsWithGesture = true
                 self.navigationItem.leftBarButtonItem = savedSplitButton
-                //savedLoginInfo.append(usernameTextField.text!)
-                //savedLoginInfo.append(passwordTextField.text!)
+                
+                var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
                 hideLogin()
+                var context:NSManagedObjectContext = appDel.managedObjectContext
+                var newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! NSManagedObject
+                newUser.setValue(usernameTextField.text!, forKey: "username")
+                newUser.setValue(passwordTextField.text!, forKey: "password")
+                try? context.save()
+                print(newUser)
+                
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
                 usernameTextField.text = ""
                 passwordTextField.text = ""
@@ -169,13 +202,15 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             if(loadThisSite != nil){
                 if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
                   
-                    let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getAttribute('description').innerhtml")
-                    let link2 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').hasAttribute('description')")
-                    let link3 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').metadata.description")
+                    let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getAttribute('metadata')")
+                    let link2 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').cover")
+                    let link3 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').innerHTML")
                     print(link!)
                     print(link2!)
                     print(link3!)
                     AutoLogin = true
+
+                    
                     /*if let content = (link){
                         let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                         for item in myStrings{
@@ -228,6 +263,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     }
     func showLogin(){
         logoView.image = UIImage(named: "D214Logo")
+        logoView.alpha = 1.0
         usernameTextField.alpha = 1.0
         passwordTextField.alpha = 1.0
         LoginButton.alpha = 1.0
@@ -288,6 +324,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             self.WebSiteView.loadRequest(NSURLRequest (URL: NSURL(string: "http://ezproxy.d214.org:2048/logout")!))
             self.isInitialWebView = true
             
+            self.deleteUserData()
+        
             self.showLogin()
             
             
@@ -321,6 +359,20 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             }
         }
         return list
+    }
+    func deleteUserData() {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDel.managedObjectContext
+        let coord = appDel.persistentStoreCoordinator
+        
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
     }
 
 }
