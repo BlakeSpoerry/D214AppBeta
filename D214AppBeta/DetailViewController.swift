@@ -48,6 +48,9 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         passwordTextField.secureTextEntry = true
         WebSiteView.delegate = self
         
+        
+        
+        
         self.checkConnection()
         if loadThisSite != nil
         {
@@ -96,6 +99,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     func webViewDidStartLoad(webView: UIWebView) {
         if(loadThisSite != nil){
             
+            
             if(loadThisSite.getName() == "Chicago Tribune" && !AutoLogin){
                 let URL: NSURL = NSURL(string: "http://nieonline.com/chicago/studentconnect.cfm")!
                 let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
@@ -135,14 +139,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 request.addValue("SecureSession=97AA9D8F-2B77-4520-A09D-228B902A1BAE; SourceHost=d214.lib.overdrive.com; UIOptions=10|45|en; _ga=GA1.3.1656530739.1457975062; _dc_gtm_UA-34791607-6=1; _ga=GA1.2.1656530739.1457975062; _dc_gtm_UA-34791607-28=1", forHTTPHeaderField: "Cookie")
                 
-                var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-                var context:NSManagedObjectContext = appDel.managedObjectContext
-                var rdata = NSFetchRequest(entityName: "User")
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let rdata = NSFetchRequest(entityName: "User")
                 rdata.returnsObjectsAsFaults = false
-                var results:NSArray = try! context.executeFetchRequest(rdata)
+                let results:NSArray = try! context.executeFetchRequest(rdata)
                 
                 if(results.count > 0){
-                var res = results[0] as! NSManagedObject
+                let res = results[0] as! NSManagedObject
                // NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
                 
                 let bodyData = "LibraryCardILS=township214&lcn=\(res.valueForKey("username") as! String)&LibraryCardPIN=\(res.valueForKey("password") as! String)&URL=Default.htm"
@@ -175,15 +179,16 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
                 self.splitViewController?.presentsWithGesture = true
                 self.navigationItem.leftBarButtonItem = savedSplitButton
-                
-                var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
                 hideLogin()
-                var context:NSManagedObjectContext = appDel.managedObjectContext
-                var newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! NSManagedObject
+                
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! NSManagedObject
                 newUser.setValue(usernameTextField.text!, forKey: "username")
                 newUser.setValue(passwordTextField.text!, forKey: "password")
                 try? context.save()
-                print(newUser)
+                
                 
                 self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
                 usernameTextField.text = ""
@@ -202,25 +207,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             if(loadThisSite != nil){
                 if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
                   
-                    let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getAttribute('metadata')")
-                    let link2 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').cover")
-                    let link3 = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').innerHTML")
-                    print(link!)
-                    print(link2!)
-                    print(link3!)
-                    AutoLogin = true
-
                     
-                    /*if let content = (link){
-                        let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-                        for item in myStrings{
-                            if(item.containsString("/thecorrespondent/")){
-                            print(item)
-                            }
+                    let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getElementsByTagName('a')[0].href")
                     AutoLogin = true
-                }
-                }
-                }*/
+                    
+                    WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
+                   
+                    
+                    
             
                 }
             }
@@ -373,6 +367,10 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         } catch let error as NSError {
             debugPrint(error)
         }
+    }
+    
+    func applicationWillTerminate(application: UIApplication) {
+        deleteUserData()
     }
 
 }
