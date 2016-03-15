@@ -132,12 +132,34 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 AutoLogin = true
                 WebSiteView.loadRequest(request)
             }
+            if(loadThisSite.getName() == "Infinite Campus" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "https://ic.d214.org/campus/verify.jsp")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                
+                
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let rdata = NSFetchRequest(entityName: "User")
+                rdata.returnsObjectsAsFaults = false
+                let results:NSArray = try! context.executeFetchRequest(rdata)
+                
+                if(results.count > 0){
+                    let res = results[0] as! NSManagedObject
+                    let bodyData = "username=\(res.valueForKey("username") as! String)&password=\(res.valueForKey("password") as! String)&appName=township_214&useCSRFProtection=true&y=16&x=34"
+                    request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                    AutoLogin = true
+                    WebSiteView.loadRequest(request)
+                }
+
+            }
             if(loadThisSite.getName() == "Overdrive" && !AutoLogin){
                 let URL: NSURL = NSURL(string: "https://twpdistrict214.libraryreserve.com/10/45/en/BANGAuthenticate.dll")!
                 let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
                 request.HTTPMethod = "POST"
                 request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-                request.addValue("SecureSession=97AA9D8F-2B77-4520-A09D-228B902A1BAE; SourceHost=d214.lib.overdrive.com; UIOptions=10|45|en; _ga=GA1.3.1656530739.1457975062; _dc_gtm_UA-34791607-6=1; _ga=GA1.2.1656530739.1457975062; _dc_gtm_UA-34791607-28=1", forHTTPHeaderField: "Cookie")
+                request.addValue("SecureSession=C1287AB9-8FA0-48E5-AD45-02F3F60E5523; SourceHost=d214.lib.overdrive.com; UIOptions=10|45|en; _ga=GA1.3.1656530739.1457975062; _dc_gtm_UA-34791607-6=1; _ga=GA1.2.1656530739.1457975062; _dc_gtm_UA-34791607-28=1", forHTTPHeaderField: "Cookie")
                 
                 let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
                 let context:NSManagedObjectContext = appDel.managedObjectContext
@@ -148,15 +170,62 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
                 if(results.count > 0){
                 let res = results[0] as! NSManagedObject
                // NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
-                
+                print("username=\(res.valueForKey("username") as! String)&pass=\(res.valueForKey("password") as! String)")
                 let bodyData = "LibraryCardILS=township214&lcn=\(res.valueForKey("username") as! String)&LibraryCardPIN=\(res.valueForKey("password") as! String)&URL=Default.htm"
-                
                 request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
                 AutoLogin = true
                 WebSiteView.loadRequest(request)
                     }
 
             }
+            if(loadThisSite.getName() == "Schoology" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "https://schoology.d214.org/login/ldap?&school=26201007")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                
+                
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let rdata = NSFetchRequest(entityName: "User")
+                rdata.returnsObjectsAsFaults = false
+                let results:NSArray = try! context.executeFetchRequest(rdata)
+                
+                if(results.count > 0){
+                    let res = results[0] as! NSManagedObject
+                    
+                    let bodyData = "mail=\(res.valueForKey("username") as! String)&pass=\(res.valueForKey("password") as! String)&school_nid=26201007&form_id=s_user_login_form"
+                    request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                    AutoLogin = true
+                    WebSiteView.loadRequest(request)
+                }
+                
+            }
+            if(loadThisSite.getName() == "Moodle" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "http://moodle2.d214.org/login/index.php")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                
+                
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let rdata = NSFetchRequest(entityName: "User")
+                rdata.returnsObjectsAsFaults = false
+                let results:NSArray = try! context.executeFetchRequest(rdata)
+                
+                if(results.count > 0){
+                    let res = results[0] as! NSManagedObject
+                    
+                    let bodyData = "username=\(res.valueForKey("username") as! String)&password=\(res.valueForKey("password") as! String)"
+                    request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                    AutoLogin = true
+                    WebSiteView.loadRequest(request)
+                }
+                
+            }
+
+
             
 
         }
@@ -339,22 +408,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         
         }
     }
-    func getFile(filename: String) -> [SuString]{
-        var list = [SuString]()
-        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "txt"){
-            
-            let data = try? String(contentsOfFile:path, encoding: NSUTF8StringEncoding)
-            if let content = (data){
-                let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-                for item in myStrings{
-                    let section = item.componentsSeparatedByString("|")
-                    list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
-                }
-            }
-        }
-        return list
-    }
-    func deleteUserData() {
+       func deleteUserData() {
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         let context = appDel.managedObjectContext
         let coord = appDel.persistentStoreCoordinator

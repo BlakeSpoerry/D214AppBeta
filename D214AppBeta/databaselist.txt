@@ -7,3 +7,5 @@ Database Magazines||
 Database Newspapers||
 Science||
 Social Science||
+Gale||
+Junior Resouces||

@@ -1,3 +1,6 @@
+Overdrive|http://d214.lib.overdrive.com/|
+Flipster|http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eon&custid=s9461855|
+Online Catalog|https://d214.follettdestiny.com/common/welcome.jsp?context=saas49_1272091|Search Your Local School Library!
 Chicago Tribune|http://nieonline.com/chicago/|
 Chicago Sun Times|http://chicagosuntimesnie.newspaperdirect.com/|
 Daily Herald|http://eedition.dailyherald.com|

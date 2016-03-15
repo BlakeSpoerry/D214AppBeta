@@ -1,0 +1,9 @@
+GALE PowerSearch|http://go.galegroup.com/ps/i.do?v=2.1&u=dist214&pg=BasicSearch&it=static&sw=w&p=GPS|
+Gale Virtual Reference|http://infotrac.galegroup.com/itweb/dist214?db=GVRL|
+Biography in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=BIC1|
+Global Issues in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=GIC|
+InfoTrac|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=STOM|
+LitFinder|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=LITFS|
+Opposing Viewpoints in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=OVIC|
+Science in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=SCIC|
+Student Resource in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=SUIC|

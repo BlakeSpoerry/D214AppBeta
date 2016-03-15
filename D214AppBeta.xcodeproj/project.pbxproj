@@ -10,6 +10,8 @@
 		4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */; };
 		4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */; };
 		4095ABE91C4EEDBA001AFE83 /* Literature.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE61C4EEDBA001AFE83 /* Literature.txt */; };
+		40B86A8B1C98664B00909101 /* Junior Resouces.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40B86A8A1C98664B00909101 /* Junior Resouces.txt */; };
+		40B86A8D1C98673B00909101 /* Gale.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40B86A8C1C98673B00909101 /* Gale.txt */; };
 		40E043ED1C63DC86006BF150 /* media.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40E043EC1C63DC86006BF150 /* media.txt */; };
 		40EEAAD41C877DAC002A378E /* Social Science.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40EEAAD31C877DAC002A378E /* Social Science.txt */; };
 		40FF38D41C6D7D8E005A308F /* Database Newspapers.txt in Resources */ = {isa = PBXBuildFile; fileRef = 40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */; };
@@ -53,6 +55,8 @@
 		4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Magazines.txt"; sourceTree = "<group>"; };
 		4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Encyclopedias.txt; sourceTree = "<group>"; };
 		4095ABE61C4EEDBA001AFE83 /* Literature.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Literature.txt; sourceTree = "<group>"; };
+		40B86A8A1C98664B00909101 /* Junior Resouces.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Junior Resouces.txt"; sourceTree = "<group>"; };
+		40B86A8C1C98673B00909101 /* Gale.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gale.txt; sourceTree = "<group>"; };
 		40E043EC1C63DC86006BF150 /* media.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.txt; sourceTree = "<group>"; };
 		40EEAAD31C877DAC002A378E /* Social Science.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Social Science.txt"; sourceTree = "<group>"; };
 		40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Newspapers.txt"; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				47056E811C46D42C00CD1969 /* College and Career.txt */,
 				40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */,
 				40FF38D51C6D7D9C005A308F /* Science.txt */,
+				40B86A8A1C98664B00909101 /* Junior Resouces.txt */,
+				40B86A8C1C98673B00909101 /* Gale.txt */,
 				47056E821C46D42C00CD1969 /* databaselist.txt */,
 				47056E831C46D42C00CD1969 /* resoucres.txt */,
 				47056E841C46D42C00CD1969 /* writing.txt */,
@@ -296,8 +302,10 @@
 			files = (
 				47FF5D891C46CED20078280B /* LaunchScreen.storyboard in Resources */,
 				4095ABE91C4EEDBA001AFE83 /* Literature.txt in Resources */,
+				40B86A8B1C98664B00909101 /* Junior Resouces.txt in Resources */,
 				40FF38D41C6D7D8E005A308F /* Database Newspapers.txt in Resources */,
 				47FF5D861C46CED20078280B /* Assets.xcassets in Resources */,
+				40B86A8D1C98673B00909101 /* Gale.txt in Resources */,
 				47056E871C46D42C00CD1969 /* College and Career.txt in Resources */,
 				40EEAAD41C877DAC002A378E /* Social Science.txt in Resources */,
 				47FF5D841C46CED20078280B /* Main.storyboard in Resources */,
@@ -484,7 +492,7 @@
 				INFOPLIST_FILE = D214AppBeta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jhhs.D214AppBeta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhhs.D214AppBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -498,7 +506,7 @@
 				INFOPLIST_FILE = D214AppBeta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jhhs.D214AppBeta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhhs.D214AppBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
