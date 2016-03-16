@@ -12,7 +12,7 @@ import CoreData
 
 import SystemConfiguration
 
-class DetailViewController: UIViewController, UIWebViewDelegate {
+class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
     var isLoggedIn: Bool!
     @IBOutlet weak var LogoutButton: UIBarButtonItem!
     @IBOutlet weak var ImageOverlay: UIImageView!
@@ -99,6 +99,10 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
     func webViewDidStartLoad(webView: UIWebView) {
         if(loadThisSite != nil){
             
+            
+            if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
+                WebSiteView.alpha = 0.0
+            }
             
             if(loadThisSite.getName() == "Chicago Tribune" && !AutoLogin){
                 let URL: NSURL = NSURL(string: "http://nieonline.com/chicago/studentconnect.cfm")!
@@ -237,7 +241,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
             let data = WebSiteView.stringByEvaluatingJavaScriptFromString("document.documentElement.outerHTML")
             
             let range = data?.rangeOfString("<title>Database Menu</title>")
-            
+            WebSiteView.alpha = 1.0
             
             
             if range != nil{
@@ -338,11 +342,25 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         splitViewController?.presentsWithGesture = false
         usernameTextField.placeholder = "Net ID"
         passwordTextField.placeholder = "Password"
+        
         LogoutButton.title = "Not Logged In"
         LogoutButton.enabled = false
         LogoutButton.tintColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
         splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
 
+    }
+     func textFieldShouldReturn(textField: UITextField) -> Bool {
+    
+        
+        if(textField == self.passwordTextField!){
+        self.LoginINPressed(self.LoginButton)
+        }
+        if(textField == self.usernameTextField!){
+            usernameTextField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+            
+        }
+        return true
     }
 
     class func isConnectedToNetwork() -> Bool {
@@ -423,10 +441,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
-    func applicationWillTerminate(application: UIApplication) {
-        deleteUserData()
-    }
-
+   
 }
 
 

@@ -48,7 +48,10 @@
                                     <constraint firstAttribute="height" constant="30" id="NWi-8i-3bp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JEX-9P-axG" id="fzw-36-Im2"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h4I-QP-BF9" userLabel="usernameTextField">
                                 <rect key="frame" x="153" y="221" width="294" height="30"/>
@@ -57,7 +60,10 @@
                                     <constraint firstAttribute="height" constant="30" id="Ljr-fh-5i7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JEX-9P-axG" id="bqx-WO-pkM"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5p-As-FAr">
                                 <rect key="frame" x="241" y="347" width="118" height="30"/>

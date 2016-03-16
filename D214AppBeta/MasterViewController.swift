@@ -174,10 +174,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
    func accessoryButtonTapped(sender: AnyObject, event: AnyObject) {
         
-        var touches: Set<UITouch> = event.allTouches()!
-        var touch: UITouch = touches.first!
-        var currentTouchPosition: CGPoint = touch.locationInView(self.tableView)
-        var indexPath: NSIndexPath = self.tableView.indexPathForRowAtPoint(currentTouchPosition)!
+        let touches: Set<UITouch> = event.allTouches()!
+        let touch: UITouch = touches.first!
+        let currentTouchPosition: CGPoint = touch.locationInView(self.tableView)
+        let indexPath: NSIndexPath = self.tableView.indexPathForRowAtPoint(currentTouchPosition)!
         tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
     }
     
