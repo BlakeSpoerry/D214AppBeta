@@ -5,12 +5,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Menu-->
         <scene sceneID="pY4-Hu-kfo">
             <objects>
-                <navigationController id="RMx-3f-FxP" sceneMemberID="viewController">
+                <navigationController title="Menu" id="RMx-3f-FxP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -48,7 +49,7 @@
                                     <constraint firstAttribute="height" constant="30" id="NWi-8i-3bp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="JEX-9P-axG" id="fzw-36-Im2"/>
                                 </connections>
@@ -114,13 +115,21 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mOI-FS-AaM">
-                        <barButtonItem key="rightBarButtonItem" id="xN5-Nx-Zyv" userLabel="LogoutButton">
-                            <connections>
-                                <action selector="LogoutPressed:" destination="JEX-9P-axG" id="mU0-s7-3So"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem id="Ihg-e7-bLs" userLabel="HelpButton">
+                                <connections>
+                                    <action selector="HelpButtonPressed:" destination="JEX-9P-axG" id="pui-hG-8En"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem id="xN5-Nx-Zyv" userLabel="LogoutButton">
+                                <connections>
+                                    <action selector="LogoutPressed:" destination="JEX-9P-axG" id="mU0-s7-3So"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="HelpButton" destination="Ihg-e7-bLs" id="9wV-Re-Ty0"/>
                         <outlet property="ImageOverlay" destination="gGi-5u-WHU" id="zCb-Yo-SZn"/>
                         <outlet property="LoginButton" destination="C5p-As-FAr" id="YF7-0c-LR9"/>
                         <outlet property="LogoutButton" destination="xN5-Nx-Zyv" id="gh0-8s-Ljl"/>
@@ -220,6 +229,26 @@
             </objects>
             <point key="canvasLocation" x="3990" y="724"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="jVR-nX-wTY">
+            <objects>
+                <viewController storyboardIdentifier="helpView" id="dfF-jR-BUQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qPL-vC-di4"/>
+                        <viewControllerLayoutGuide type="bottom" id="5ms-nw-8rB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pTB-Gi-2Ab">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z4h-b0-L6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4051" y="1438"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
             <objects>
@@ -237,6 +266,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zXj-iv-jX4"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

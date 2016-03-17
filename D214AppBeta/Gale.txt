@@ -1,4 +1,4 @@
-GALE PowerSearch|http://go.galegroup.com/ps/i.do?v=2.1&u=dist214&pg=BasicSearch&it=static&sw=w&p=GPS|
+GALE PowerSearch|http://go.galegroup.com/auth/capmAuthentication.do?password=Research214&proceed=&origURL=http%3A%2F%2Fgo.galegroup.com%2Fps%2Fi.do%3Fv%3D2.1%26u%3Ddist214%26pg%3DBasicSearch%26it%3Dstatic%26sw%3Dw%26p%3DGPS%26authCount%3D2&productShortName=GPS&productLongName=PowerSearch&cookieTrans=&userGroupName=dist214&authProcessCount=1|
 Gale Virtual Reference|http://infotrac.galegroup.com/itweb/dist214?db=GVRL|
 Biography in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=BIC1|
 Global Issues in Context|http://ezproxy.d214.org:2048/login?url=http://infotrac.galegroup.com/itweb/dist214?db=GIC|

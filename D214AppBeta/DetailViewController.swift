@@ -10,11 +10,13 @@ import UIKit
 import WebKit
 import CoreData
 
+
 import SystemConfiguration
 
 class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
     var isLoggedIn: Bool!
     @IBOutlet weak var LogoutButton: UIBarButtonItem!
+    @IBOutlet weak var HelpButton: UIBarButtonItem!
     @IBOutlet weak var ImageOverlay: UIImageView!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -56,8 +58,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         {
             self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
-            LogoutButton.title = "Logged In!"
-            LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
+            LogoutButton.title = "Logout?"
+            LogoutButton.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
             ImageOverlay.alpha = 0.0
         
             isLoggedIn = true
@@ -228,6 +230,30 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                 }
                 
             }
+            if(loadThisSite.getName() == "Gapps" && !AutoLogin){
+                let URL: NSURL = NSURL(string: "https://gapps.d214.org/")!
+                let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
+                request.HTTPMethod = "POST"
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                
+                
+                let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                let rdata = NSFetchRequest(entityName: "User")
+                rdata.returnsObjectsAsFaults = false
+                let results:NSArray = try! context.executeFetchRequest(rdata)
+                
+                if(results.count > 0){
+                    let res = results[0] as! NSManagedObject
+                    
+                    let bodyData = "netid=\(res.valueForKey("username") as! String)&netidpword=\(res.valueForKey("password") as! String)"
+                    request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                    AutoLogin = true
+                    WebSiteView.loadRequest(request)
+                }
+                
+            
+            }
 
 
             
@@ -247,11 +273,13 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             if range != nil{
                 WebSiteView.alpha = 0.0
                 isLoggedIn = true
-                LogoutButton.title = "Logged In!"
+                LogoutButton.title = "Logout?"
                 LogoutButton.enabled = true
-                LogoutButton.tintColor = UIColor(red: 0.0, green: 255/255, blue: 0.0, alpha: 1.0)
+                LogoutButton.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
+
                 self.splitViewController?.presentsWithGesture = true
                 self.navigationItem.leftBarButtonItem = savedSplitButton
+                
                 hideLogin()
                 
                 let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
@@ -345,7 +373,6 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         
         LogoutButton.title = "Not Logged In"
         LogoutButton.enabled = false
-        LogoutButton.tintColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
         splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
 
     }
@@ -395,6 +422,26 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             
 
         }
+
+    }
+    @IBAction func HelpButtonPressed(sender: AnyObject) {
+        //let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("infoView"))! as UIViewController
+        //let nav = UINavigationController(rootViewController: popoverContent)
+        //nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        //let popover = nav.popoverPresentationController
+        //self.presentViewController(nav, animated: true, completion: { _ in })
+        // popover!.permittedArrowDirections = .Up
+        
+        //popoverContent.preferredContentSize = CGSizeMake(250, 250)
+        //UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 300, height: 300), textContainer: NSTextContainer())
+        //let textField: UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        
+        //popoverContent.view.addSubview(textField)
+        //popover!.delegate = self.navigationController.dele
+        //popover!.sourceView = self.view
+        //popover!.sourceRect = tableView.rectForRowAtIndexPath(indexPath)
+        //popoverContent.navigationController?.setNavigationBarHidden(true, animated: true)
+        
 
     }
     @IBAction func LogoutPressed(sender: AnyObject) {
