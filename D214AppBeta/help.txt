@@ -1,0 +1,2 @@
+Help?||Swipe Right from the edge of your screen to show the menu or by pressing 'Menu'. Then press one of the 4 tabs in the top left. Once selected, press any Blue Cell To open a app resouce. Any Black cells open to show a list of resouces. Click on the ‘?’ next to the cell name to find a description of the site itself.
+Support?||Contact Tech support by Emailing bspoerry@gmail.com or calling 1-847-718-5103

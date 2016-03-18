@@ -5,6 +5,7 @@ Literature||
 Encyclopedias||
 Database Magazines||
 Database Newspapers||
+Math||
 Science||
 Social Science||
 Gale||

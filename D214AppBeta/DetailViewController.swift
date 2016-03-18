@@ -13,7 +13,7 @@ import CoreData
 
 import SystemConfiguration
 
-class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
+class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
     var isLoggedIn: Bool!
     @IBOutlet weak var LogoutButton: UIBarButtonItem!
     @IBOutlet weak var HelpButton: UIBarButtonItem!
@@ -21,6 +21,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     
+    @IBOutlet weak var schoolLogo: UIImageView!
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var WebSiteView: UIWebView!
@@ -58,9 +59,12 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         {
             self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
-            LogoutButton.title = "Logout?"
+            LogoutButton.title = "Logout"
             LogoutButton.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
             ImageOverlay.alpha = 0.0
+            schoolLogo.alpha = 0.0
+            self.enableHelp()
+            
         
             isLoggedIn = true
             WebSiteView.loadRequest(NSURLRequest(URL: (loadThisSite.getURL())))
@@ -77,6 +81,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                 splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
                 
                 showLogin()
+                
                 
             }
             
@@ -185,6 +190,16 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
 
             }
             if(loadThisSite.getName() == "Schoology" && !AutoLogin){
+                
+                var schoolHooks = "Schoology://"
+                var schoolUrl = NSURL(string: schoolHooks)
+                if UIApplication.sharedApplication().canOpenURL(schoolUrl!)
+                {
+                    UIApplication.sharedApplication().openURL(schoolUrl!)
+                    
+                }
+            
+                
                 let URL: NSURL = NSURL(string: "https://schoology.d214.org/login/ldap?&school=26201007")!
                 let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
                 request.HTTPMethod = "POST"
@@ -205,7 +220,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                     AutoLogin = true
                     WebSiteView.loadRequest(request)
                 }
-                
+            
             }
             if(loadThisSite.getName() == "Moodle" && !AutoLogin){
                 let URL: NSURL = NSURL(string: "http://moodle2.d214.org/login/index.php")!
@@ -273,19 +288,20 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             if range != nil{
                 WebSiteView.alpha = 0.0
                 isLoggedIn = true
-                LogoutButton.title = "Logout?"
+                LogoutButton.title = "Logout"
                 LogoutButton.enabled = true
                 LogoutButton.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
 
                 self.splitViewController?.presentsWithGesture = true
                 self.navigationItem.leftBarButtonItem = savedSplitButton
                 
-                hideLogin()
+                self.hideLogin()
+                
                 
                 let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
             
                 let context:NSManagedObjectContext = appDel.managedObjectContext
-                let newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! NSManagedObject
+                let newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) 
                 newUser.setValue(usernameTextField.text!, forKey: "username")
                 newUser.setValue(passwordTextField.text!, forKey: "password")
                 try? context.save()
@@ -353,8 +369,11 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         usernameTextField.alpha = 0.0
         passwordTextField.alpha = 0.0
         logoView.alpha = 0.0
-        ImageOverlay.image = UIImage(named: "backgroundimage")
+        ImageOverlay.image = UIImage(named: "White")
+        schoolLogo.image = UIImage(named:"JHHS-Logo")
+        schoolLogo.alpha = 1.0
         self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
+        self.enableHelp()
     }
     func showLogin(){
         logoView.image = UIImage(named: "D214Logo")
@@ -364,12 +383,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         LoginButton.alpha = 1.0
         ImageOverlay.image = UIImage(named: "RedLogin")
         ImageOverlay.alpha = 1.0
+        schoolLogo.alpha = 0.0
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.leftBarButtonItem?.enabled = false
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
         splitViewController?.presentsWithGesture = false
         usernameTextField.placeholder = "Net ID"
         passwordTextField.placeholder = "Password"
+        self.disableHelp()
         
         LogoutButton.title = "Not Logged In"
         LogoutButton.enabled = false
@@ -425,28 +446,31 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
 
     }
     @IBAction func HelpButtonPressed(sender: AnyObject) {
-        //let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("infoView"))! as UIViewController
-        //let nav = UINavigationController(rootViewController: popoverContent)
-        //nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-        //let popover = nav.popoverPresentationController
-        //self.presentViewController(nav, animated: true, completion: { _ in })
-        // popover!.permittedArrowDirections = .Up
+       
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("helpView"))! as! HelpTableViewController
+        popoverContent.helpData = getFile("help")
+
+        let nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        let popover = nav.popoverPresentationController
+        self.presentViewController(nav, animated: true, completion: { _ in })
+        popover!.permittedArrowDirections = .Up
+        popover!.sourceView = self.view
+
+        popoverContent.preferredContentSize = CGSizeMake(200, 200)
         
-        //popoverContent.preferredContentSize = CGSizeMake(250, 250)
-        //UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 300, height: 300), textContainer: NSTextContainer())
-        //let textField: UITextView = UITextView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        popover!.barButtonItem = sender as? UIBarButtonItem
+        popover!.delegate = self
         
-        //popoverContent.view.addSubview(textField)
-        //popover!.delegate = self.navigationController.dele
-        //popover!.sourceView = self.view
-        //popover!.sourceRect = tableView.rectForRowAtIndexPath(indexPath)
-        //popoverContent.navigationController?.setNavigationBarHidden(true, animated: true)
+
+
+      
         
 
     }
     @IBAction func LogoutPressed(sender: AnyObject) {
         if(isLoggedIn == true){
-        let alertController = UIAlertController(title: "Logout?", message: "Are you sure you want to logout?", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .Alert)
         
         let logoutAction = UIAlertAction(title: "Yes", style: .Cancel) { (action) in
             self.WebSiteView.loadRequest(NSURLRequest (URL: NSURL(string: "http://ezproxy.d214.org:2048/logout")!))
@@ -455,6 +479,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             self.deleteUserData()
         
             self.showLogin()
+            
             
             
             
@@ -487,6 +512,51 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             debugPrint(error)
         }
     }
+    func disableHelp(){
+        let icon = ChangeImageSize(UIImage(named: "Help-Icon")!, scaledToSize: CGSize(width: 33.0, height: 33.0))
+        
+      
+        HelpButton.image = icon
+        
+        
+        HelpButton.enabled = false
+        
+    }
+    func enableHelp(){
+        let icon = ChangeImageSize(UIImage(named: "Help-Icon")!, scaledToSize: CGSize(width: 33.0, height: 33.0))
+        HelpButton.image = icon
+        HelpButton.enabled = true
+        
+    }
+    func ChangeImageSize(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    func getFile(filename: String) -> [SuString]{
+        var list = [SuString]()
+        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "txt"){
+            
+            let data = try? String(contentsOfFile:path, encoding: NSUTF8StringEncoding)
+            if let content = (data){
+                let myStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+                for item in myStrings{
+                    let section = item.componentsSeparatedByString("|")
+                    list.append(SuString(title: section[0], url: NSURL(string: section[1])!, info: section[2]))
+                }
+            }
+        }
+        return list
+    }
+    func schemeAvailable(scheme: String) -> Bool {
+        if let url = NSURL.init(string: scheme) {
+            return UIApplication.sharedApplication().canOpenURL(url)
+        }
+        return false
+    }
+
     
    
 }

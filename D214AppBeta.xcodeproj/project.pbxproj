@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400E20171C9BA6CA00B4FF28 /* Math.txt in Resources */ = {isa = PBXBuildFile; fileRef = 400E20161C9BA6CA00B4FF28 /* Math.txt */; };
+		400E20191C9BA9CD00B4FF28 /* HelpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E20181C9BA9CD00B4FF28 /* HelpTableViewController.swift */; };
+		400E201D1C9BB04700B4FF28 /* help.txt in Resources */ = {isa = PBXBuildFile; fileRef = 400E201C1C9BB04700B4FF28 /* help.txt */; };
 		4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */; };
 		4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */; };
 		4095ABE91C4EEDBA001AFE83 /* Literature.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4095ABE61C4EEDBA001AFE83 /* Literature.txt */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		400E20161C9BA6CA00B4FF28 /* Math.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Math.txt; sourceTree = "<group>"; };
+		400E20181C9BA9CD00B4FF28 /* HelpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewController.swift; sourceTree = "<group>"; };
+		400E201C1C9BB04700B4FF28 /* help.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = help.txt; sourceTree = "<group>"; };
 		4095ABE41C4EEDBA001AFE83 /* Database Magazines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Database Magazines.txt"; sourceTree = "<group>"; };
 		4095ABE51C4EEDBA001AFE83 /* Encyclopedias.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Encyclopedias.txt; sourceTree = "<group>"; };
 		4095ABE61C4EEDBA001AFE83 /* Literature.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Literature.txt; sourceTree = "<group>"; };
@@ -123,7 +129,9 @@
 				47056E811C46D42C00CD1969 /* College and Career.txt */,
 				40FF38D31C6D7D8E005A308F /* Database Newspapers.txt */,
 				40FF38D51C6D7D9C005A308F /* Science.txt */,
+				400E20161C9BA6CA00B4FF28 /* Math.txt */,
 				40B86A8A1C98664B00909101 /* Junior Resouces.txt */,
+				400E201C1C9BB04700B4FF28 /* help.txt */,
 				40B86A8C1C98673B00909101 /* Gale.txt */,
 				47056E821C46D42C00CD1969 /* databaselist.txt */,
 				47056E831C46D42C00CD1969 /* resoucres.txt */,
@@ -137,6 +145,7 @@
 			children = (
 				47FF5D7E1C46CED20078280B /* MasterViewController.swift */,
 				47FF5D801C46CED20078280B /* DetailViewController.swift */,
+				400E20181C9BA9CD00B4FF28 /* HelpTableViewController.swift */,
 			);
 			name = SplitViewController;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 				40EEAAD41C877DAC002A378E /* Social Science.txt in Resources */,
 				47FF5D841C46CED20078280B /* Main.storyboard in Resources */,
 				4095ABE71C4EEDBA001AFE83 /* Database Magazines.txt in Resources */,
+				400E20171C9BA6CA00B4FF28 /* Math.txt in Resources */,
 				47056E881C46D42C00CD1969 /* databaselist.txt in Resources */,
 				47056E861C46D42C00CD1969 /* Biography.txt in Resources */,
 				4095ABE81C4EEDBA001AFE83 /* Encyclopedias.txt in Resources */,
@@ -318,6 +328,7 @@
 				47056E8A1C46D42C00CD1969 /* writing.txt in Resources */,
 				40FF38D61C6D7D9C005A308F /* Science.txt in Resources */,
 				47056E851C46D42C00CD1969 /* Auto.txt in Resources */,
+				400E201D1C9BB04700B4FF28 /* help.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47FF5D7D1C46CED20078280B /* D214AppBeta.xcdatamodeld in Sources */,
+				400E20191C9BA9CD00B4FF28 /* HelpTableViewController.swift in Sources */,
 				47056E7E1C46D06300CD1969 /* SuString.swift in Sources */,
 				47FF5D7A1C46CED20078280B /* AppDelegate.swift in Sources */,
 				47FF5D7F1C46CED20078280B /* MasterViewController.swift in Sources */,
