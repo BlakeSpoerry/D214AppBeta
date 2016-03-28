@@ -9,11 +9,11 @@
 import UIKit
 import WebKit
 import CoreData
-
+import SafariServices
 
 import SystemConfiguration
 
-class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
+class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, SFSafariViewControllerDelegate {
     var isLoggedIn: Bool!
     @IBOutlet weak var LogoutButton: UIBarButtonItem!
     @IBOutlet weak var HelpButton: UIBarButtonItem!
@@ -21,6 +21,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     
+    @IBOutlet weak var WebToolBar: UIToolbar!
     @IBOutlet weak var schoolLogo: UIImageView!
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,6 +31,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
     var savedSplitButton: UIBarButtonItem!
     var savedLoginInfo: [String]!
     var AutoLogin = false
+    var docController: UIDocumentInteractionController!
+
     
     var detailItem: AnyObject? {
         didSet {
@@ -45,7 +48,9 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         }
     }
     
-
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.secureTextEntry = true
@@ -57,12 +62,16 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         self.checkConnection()
         if loadThisSite != nil
         {
+           
             self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
             self.splitViewController?.presentsWithGesture = true
             LogoutButton.title = "Logout"
             LogoutButton.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
-            ImageOverlay.alpha = 0.0
-            schoolLogo.alpha = 0.0
+            WebToolBar.tintColor = UIColor(red: 255/255, green: 140/255, blue: 0.0, alpha: 1.0)
+
+            ImageOverlay.hidden = true
+            
+            schoolLogo.hidden = true
             self.enableHelp()
             
         
@@ -105,10 +114,14 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
     }
     func webViewDidStartLoad(webView: UIWebView) {
         if(loadThisSite != nil){
-            
+            WebSiteView.scalesPageToFit = false
+            if((loadThisSite.getName() == "The Adventures of Huckleberry Finn" || loadThisSite.getName() == "The Great Gatsby" || loadThisSite.getName() == "The Scarlet Letter")){
+                WebSiteView.scalesPageToFit = true
+            }
             
             if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
-                WebSiteView.alpha = 0.0
+                self.shouldShowBackground(true)
+
             }
             
             if(loadThisSite.getName() == "Chicago Tribune" && !AutoLogin){
@@ -120,6 +133,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                 request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
                 AutoLogin = true
                 WebSiteView.loadRequest(request)
+                
+
                 
             }
             if(loadThisSite.getName() == "Chicago Sun Times" && !AutoLogin){
@@ -181,7 +196,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                 if(results.count > 0){
                 let res = results[0] as! NSManagedObject
                // NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
-                print("username=\(res.valueForKey("username") as! String)&pass=\(res.valueForKey("password") as! String)")
+                
                 let bodyData = "LibraryCardILS=township214&lcn=\(res.valueForKey("username") as! String)&LibraryCardPIN=\(res.valueForKey("password") as! String)&URL=Default.htm"
                 request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
                 AutoLogin = true
@@ -191,7 +206,8 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             }
             if(loadThisSite.getName() == "Schoology" && !AutoLogin){
                 
-                var schoolHooks = "Schoology://"
+                
+                var schoolHooks = "schoology://app"
                 var schoolUrl = NSURL(string: schoolHooks)
                 if UIApplication.sharedApplication().canOpenURL(schoolUrl!)
                 {
@@ -203,7 +219,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
                 let URL: NSURL = NSURL(string: "https://schoology.d214.org/login/ldap?&school=26201007")!
                 let request:NSMutableURLRequest = NSMutableURLRequest(URL: URL)
                 request.HTTPMethod = "POST"
-                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                request.addValue("applica tion/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 
                 
                 let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
@@ -323,12 +339,17 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             }
             if(loadThisSite != nil){
                 if(loadThisSite.getName() == "Correspondent" && !AutoLogin){
-                  
-                    
+                    self.shouldShowBackground(true)
+                    WebSiteView.hidden = true
+                    schoolLogo.image = UIImage(named:"JHHS-Logo")
                     let link = WebSiteView.stringByEvaluatingJavaScriptFromString("document.getElementById('streamElm14').getElementsByTagName('a')[0].href")
+                    print(link)
                     AutoLogin = true
+                    let svc = SFSafariViewController(URL: NSURL(string: link!)!)
+                    svc.delegate = self
+                    self.presentViewController(svc, animated: true, completion: nil)
                     
-                    WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
+                                        //WebSiteView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
                    
                     
                     
@@ -337,6 +358,7 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             }
         }
         isInitialWebView = false
+        
         
     }
 
@@ -371,11 +393,12 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         logoView.alpha = 0.0
         ImageOverlay.image = UIImage(named: "White")
         schoolLogo.image = UIImage(named:"JHHS-Logo")
-        schoolLogo.alpha = 1.0
+        self.shouldShowBackground(true)
         self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
         self.enableHelp()
     }
     func showLogin(){
+        self.shouldShowBackground(false)
         logoView.image = UIImage(named: "D214Logo")
         logoView.alpha = 1.0
         usernameTextField.alpha = 1.0
@@ -383,7 +406,9 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         LoginButton.alpha = 1.0
         ImageOverlay.image = UIImage(named: "RedLogin")
         ImageOverlay.alpha = 1.0
+        WebSiteView.alpha = 0.0
         schoolLogo.alpha = 0.0
+        WebToolBar.hidden = true
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.leftBarButtonItem?.enabled = false
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clearColor()
@@ -396,6 +421,27 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         LogoutButton.enabled = false
         splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryHidden
 
+    }
+    
+    func shouldShowBackground(show: Bool){
+        if show{
+            schoolLogo.alpha = 1.0
+            WebSiteView.alpha = 0.0
+            ImageOverlay.alpha = 1.0
+            WebSiteView.hidden = true
+            schoolLogo.hidden = false
+            WebToolBar.hidden = true
+
+        }else{
+            schoolLogo.alpha = 0.0
+            WebSiteView.alpha = 1.0
+            ImageOverlay.alpha = 0.0
+            WebSiteView.hidden = false
+            schoolLogo.hidden = true
+            WebToolBar.hidden = false
+        
+        }
+        
     }
      func textFieldShouldReturn(textField: UITextField) -> Bool {
     
@@ -483,7 +529,6 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
             
             
             
-            
         }
         alertController.addAction(logoutAction)
         
@@ -557,8 +602,31 @@ class DetailViewController: UIViewController, UIWebViewDelegate, UITextFieldDele
         return false
     }
 
+    @IBAction func WebViewBackPressed(sender: AnyObject) {
+        if WebSiteView.canGoBack{
+            WebSiteView.goBack()
+        }
+    }
+    @IBAction func WebViewForwardPressed(sender: AnyObject) {
+        if WebSiteView.canGoForward{
+            WebSiteView.goForward()
+        }
+    }
     
+    @IBAction func WebViewRefreshPressed(sender: AnyObject) {
+        WebSiteView.reload()
+    }
    
+    @IBAction func OpenInPressed(sender: AnyObject) {
+        let activityViewController = UIActivityViewController (
+            activityItems: [(WebSiteView.request?.URL!.absoluteString)! as NSString],
+            applicationActivities: nil
+        )
+         activityViewController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        presentViewController(activityViewController, animated: true, completion: nil)
+
+        
+    }
 }
 
 

@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IER-16-SKw">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="ImageOverlay" translatesAutoresizingMaskIntoConstraints="NO" id="gGi-5u-WHU" userLabel="ImageOverlay">
@@ -98,6 +98,32 @@
                                     <constraint firstAttribute="width" secondItem="rYU-LY-3T4" secondAttribute="height" multiplier="158:167" id="6if-2d-Wec"/>
                                 </constraints>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOU-mw-mtP" userLabel="WebToolBar">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="mdE-Uh-aXC">
+                                        <connections>
+                                            <action selector="WebViewBackPressed:" destination="JEX-9P-axG" id="psy-2Z-003"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="fastForward" id="FeU-CJ-VRe">
+                                        <connections>
+                                            <action selector="WebViewForwardPressed:" destination="JEX-9P-axG" id="ODx-UO-wZ3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="refresh" id="5PD-X8-wWH">
+                                        <connections>
+                                            <action selector="WebViewRefreshPressed:" destination="JEX-9P-axG" id="vwQ-dA-NPX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="dYR-3n-Juu"/>
+                                    <barButtonItem systemItem="action" id="EQx-0D-uJ1">
+                                        <connections>
+                                            <action selector="OpenInPressed:" destination="JEX-9P-axG" id="YP5-wx-C7c"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -109,19 +135,23 @@
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="gGi-5u-WHU" secondAttribute="bottom" id="4YM-eO-FDb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="abN-1c-vTJ" secondAttribute="trailing" constant="140" id="794-Fw-5BA"/>
                             <constraint firstItem="KYp-7U-KZf" firstAttribute="top" secondItem="h4I-QP-BF9" secondAttribute="bottom" constant="34" id="Ayh-Hi-mCC"/>
+                            <constraint firstItem="WOU-mw-mtP" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="L4O-La-Ivc"/>
                             <constraint firstItem="h4I-QP-BF9" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="MFi-zV-2la"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WOU-mw-mtP" secondAttribute="trailing" constant="-20" id="MMg-Ey-fbl"/>
                             <constraint firstItem="C5p-As-FAr" firstAttribute="top" secondItem="KYp-7U-KZf" secondAttribute="bottom" constant="32" id="Nzf-OK-EA1"/>
                             <constraint firstItem="gGi-5u-WHU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="ONr-9f-KYK"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="WOU-mw-mtP" secondAttribute="bottom" id="OsN-hN-N0X"/>
                             <constraint firstItem="4wf-cB-931" firstAttribute="top" secondItem="C5p-As-FAr" secondAttribute="bottom" constant="56" id="Pr1-w6-lwh"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="rYU-LY-3T4" secondAttribute="bottom" id="SVW-p6-6aG"/>
                             <constraint firstItem="C5p-As-FAr" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="VdK-om-xZe"/>
                             <constraint firstItem="4wf-cB-931" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="VwX-2w-6ny"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IER-16-SKw" secondAttribute="trailing" constant="-20" id="YLd-wH-q4H"/>
                             <constraint firstItem="abN-1c-vTJ" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="aN1-Cb-yt1"/>
+                            <constraint firstItem="WOU-mw-mtP" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="aq5-EJ-P89"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gGi-5u-WHU" secondAttribute="trailing" constant="-20" id="caR-AU-Qfo"/>
                             <constraint firstItem="abN-1c-vTJ" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="141" id="eXE-a1-SZH"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="gGi-5u-WHU" secondAttribute="bottom" id="ekq-Gb-64Z"/>
-                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="IER-16-SKw" secondAttribute="bottom" id="fne-ww-9BX"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="IER-16-SKw" secondAttribute="bottom" constant="44" id="fne-ww-9BX"/>
                             <constraint firstItem="h4I-QP-BF9" firstAttribute="top" secondItem="abN-1c-vTJ" secondAttribute="bottom" constant="26" id="hTm-V5-G4W"/>
                             <constraint firstItem="gGi-5u-WHU" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="topMargin" id="m0l-qD-i3w"/>
                             <constraint firstItem="IER-16-SKw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="oN2-4f-Yis"/>
@@ -151,6 +181,7 @@
                         <outlet property="LoginButton" destination="C5p-As-FAr" id="YF7-0c-LR9"/>
                         <outlet property="LogoutButton" destination="xN5-Nx-Zyv" id="gh0-8s-Ljl"/>
                         <outlet property="WebSiteView" destination="IER-16-SKw" id="2m4-3p-PUq"/>
+                        <outlet property="WebToolBar" destination="WOU-mw-mtP" id="744-F0-HoF"/>
                         <outlet property="logoView" destination="abN-1c-vTJ" id="Sl4-qu-vwu"/>
                         <outlet property="passwordTextField" destination="KYp-7U-KZf" id="T0C-Cn-XPM"/>
                         <outlet property="schoolLogo" destination="rYU-LY-3T4" id="6AR-QY-NEK"/>
